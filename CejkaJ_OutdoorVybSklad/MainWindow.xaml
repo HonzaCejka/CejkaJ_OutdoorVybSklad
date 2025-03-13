@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CejkaJ_OutdoorVybSklad"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        
+        <ListView x:Name="LVProd">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Id}"  x:Name="IDCol">ID</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Jmeno}"  x:Name="JmenoCol">Jméno</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Prijmeni}"  x:Name="PrijmeniCol">Příjmení</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Adresa}"  x:Name="AdresaCol">Adresa</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Cena}"  x:Name="CenaCol">Cena</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding DatumVytvoreni}"  x:Name="DateVytvCol">Datum Vytvoření</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
     </Grid>
 </Window>

@@ -16,9 +16,16 @@ namespace CejkaJ_OutdoorVybSklad
     /// </summary>
     public partial class MainWindow : Window
     {
+        string cs = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\cejka.jan\source\repos\CejkaJ_OutdoorVybSklad\CejkaJ_OutdoorVybSklad\ShopSys.mdf;Integrated Security=True";
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            SqlRepos sqlRepos = new SqlRepos(cs);
+            LVProd.ItemsSource = sqlRepos.GetProdejka();
         }
     }
 }
