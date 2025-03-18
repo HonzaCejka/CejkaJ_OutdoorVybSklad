@@ -12,8 +12,10 @@ namespace CejkaJ_OutdoorVybSklad
         public string ConnectionString { get; set; }
         public SqlRepos(string connectionString)
         {
-            //ConnectionString = connectionString;
-            ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\cejka.jan\source\repos\CejkaJ_OutdoorVybSklad\CejkaJ_OutdoorVybSklad\ShopSys.mdf;Integrated Security=True";
+            //ConnectionString = skola
+            //ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\cejka.jan\source\repos\CejkaJ_OutdoorVybSklad\CejkaJ_OutdoorVybSklad\ShopSys.mdf;Integrated Security=True";
+            //ConnectionString = doma
+            ConnectionString = @"";
         }
 
         public List<Prodejka> GetProdejka()
