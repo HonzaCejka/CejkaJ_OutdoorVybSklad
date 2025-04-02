@@ -23,6 +23,6 @@ INSERT INTO dbo.ZboNM (IdZbo, IdProd, Pocet)
 VALUES 
 (1, 4, 2), -- 2 cepíny pro prodejku 1 (Jan Novák)
 (2, 4, 1), -- 1 mačky pro prodejku 1 (Jan Novák)
-(3, 2, 1), -- 1 lano pro prodejku 2 (Petr Svoboda)
-(4, 2, 4), -- 4 karabiny pro prodejku 2 (Petr Svoboda)
+(3, 5, 1), -- 1 lano pro prodejku 2 (Petr Svoboda)
+(4, 5, 4), -- 4 karabiny pro prodejku 2 (Petr Svoboda)
 (5, 3, 1); -- 1 sedák pro prodejku 3 (Eva Müllerová)
