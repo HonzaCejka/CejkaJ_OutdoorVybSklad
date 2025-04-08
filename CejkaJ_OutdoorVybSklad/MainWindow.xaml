@@ -7,18 +7,128 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <ListView x:Name="LVProd">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Id}"  x:Name="IDCol">ID</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Jmeno}"  x:Name="JmenoCol">Jméno</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Prijmeni}"  x:Name="PrijmeniCol">Příjmení</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Adresa}"  x:Name="AdresaCol">Adresa</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Cena}"  x:Name="CenaCol">Cena</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding DatumVytvoreni}"  x:Name="DateVytvCol">Datum Vytvoření</GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <TabControl>
+            <TabItem Header="Vydejky">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView x:Name="LVProd" MouseDoubleClick="LVProd_MouseDoubleClick" Grid.Column="0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Id}"  x:Name="IDCol">
+                                    <GridViewColumnHeader Content="Id" Click="GridViewColumnHeader_Click"/>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Jmeno}"  x:Name="JmenoCol">
+                                    <GridViewColumnHeader Content="Jmeno" Click="GridViewColumnHeader_Click"/>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Prijmeni}"  x:Name="PrijmeniCol">
+                                    <GridViewColumnHeader Content="Prijmeni" Click="GridViewColumnHeader_Click"/>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Adresa}"  x:Name="AdresaCol">
+                                    <GridViewColumnHeader Content="Adresa" Click="GridViewColumnHeader_Click"/>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Cena}"  x:Name="CenaCol">
+                                    <GridViewColumnHeader Content="Cena" Click="GridViewColumnHeader_Click"/>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding DatumVytvoreni}"  x:Name="DateVytvCol">
+                                    <GridViewColumnHeader Content="Datum Vytvoreni" Click="GridViewColumnHeader_Click"/>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Column="1">
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Center">Přidat Prodejku</Label>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Center">Zakaznici:</Label>
+                        <ListView x:Name="LVZak2">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding IdZak}"  >
+                                        <GridViewColumnHeader Content="Id" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Jmeno}"  >
+                                        <GridViewColumnHeader Content="Jméno" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Prijmeni}"  >
+                                        <GridViewColumnHeader Content="Příjmení" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Adresa}" >
+                                        <GridViewColumnHeader Content="Adresa" />
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Center">Zboží: (Ctrl + Click)</Label>
+                        <ListView x:Name="LVZbo2" SelectionMode="Extended">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding IdZbo}" >
+                                        <GridViewColumnHeader Content="Id" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Nazev}" >
+                                        <GridViewColumnHeader Content="Nazev" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Popis}">
+                                        <GridViewColumnHeader Content="Popis" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding PocetKsSklad}">
+                                        <GridViewColumnHeader Content="Pocet Ks Sklad" />
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding CenaKs}">
+                                        <GridViewColumnHeader Content="Cena za ks"/>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Content="Add" Click="Button_Click" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Uživatelé">
+                <ListView x:Name="LVZak">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding IdZak}"  x:Name="IDZakCol">
+                                <GridViewColumnHeader Content="Id" />
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Jmeno}"  x:Name="JmenoZakCol">
+                                <GridViewColumnHeader Content="Jméno" />
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Prijmeni}"  x:Name="PrijmeniZakCol">
+                                <GridViewColumnHeader Content="Příjmení" />
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Adresa}"  x:Name="AdresaZakCol">
+                                <GridViewColumnHeader Content="Adresa" />
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Zboží">
+                <ListView x:Name="LVZbo">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding IdZbo}"  x:Name="IDZboCol">
+                                <GridViewColumnHeader Content="Id" />
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Nazev}"  x:Name="NazevCol">
+                                <GridViewColumnHeader Content="Nazev" />
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Popis}"  x:Name="PopisCol">
+                                <GridViewColumnHeader Content="Popis" />
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding PocetKsSklad}"  x:Name="PKSCol">
+                                <GridViewColumnHeader Content="Pocet Ks Sklad" />
+                            </GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding CenaKs}"  x:Name="CenaksCol">
+                                <GridViewColumnHeader Content="Cena za ks"/>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>
