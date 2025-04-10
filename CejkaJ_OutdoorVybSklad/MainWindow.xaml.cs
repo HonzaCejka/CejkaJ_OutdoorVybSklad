@@ -18,7 +18,7 @@ namespace CejkaJ_OutdoorVybSklad
     {
         private string currentSortColumn = "Id";
         private bool isAscending = true;        
-        static string cs = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\cejka.jan\source\repos\CejkaJ_OutdoorVybSklad\CejkaJ_OutdoorVybSklad\ShopSys.mdf;Integrated Security=True";
+        static string cs = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\cejka.jan\Source\Repos\HonzaCejka\CejkaJ_OutdoorVybSklad\CejkaJ_OutdoorVybSklad\Database1.mdf;Integrated Security=True";
         SqlRepos sqlRepos = new SqlRepos(cs);
         public MainWindow()
         {

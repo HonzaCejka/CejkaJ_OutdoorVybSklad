@@ -7,7 +7,7 @@ CREATE TABLE [dbo].[Zbozi] (
     PRIMARY KEY CLUSTERED ([IdZbo] ASC)
 );
 CREATE TABLE [dbo].[ZboNM] (
-    [IdZboNM] INT NOT NULL IDENTITY,
+    [IdZboNM] INT NOT NULL IDENTITY (1,1),
     [IdZbo]   INT NOT NULL,
     [IdProd]  INT NOT NULL,
     [Pocet] INT NOT NULL, 
@@ -17,7 +17,7 @@ CREATE TABLE [dbo].[ZboNM] (
 );
 
 CREATE TABLE [dbo].[Zak] (
-    [IdZak]    INT          NOT NULL,
+    [IdZak]    INT  IDENTITY (1,1) NOT NULL,
     [Jmeno]    VARCHAR (50) NOT NULL,
     [Prijmeni] VARCHAR (50) NOT NULL,
     [Adresa]   VARCHAR (100) NOT NULL,
