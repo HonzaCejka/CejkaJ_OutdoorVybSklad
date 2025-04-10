@@ -26,11 +26,15 @@ namespace CejkaJ_OutdoorVybSklad
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            update(); 
+        }
+        public void update()
+        {
             LVZbo.ItemsSource = sqlRepos.GetZbo("IdZbo", "asc");
             LVZbo2.ItemsSource = sqlRepos.GetZbo("IdZbo", "asc");
-            LVProd.ItemsSource = sqlRepos.GetProdejka("idProd","asc");
-            LVZak.ItemsSource = sqlRepos.GetZak("IdZak","asc");
-            LVZak2.ItemsSource = sqlRepos.GetZak("IdZak", "asc");            
+            LVProd.ItemsSource = sqlRepos.GetProdejka("idProd", "asc");
+            LVZak.ItemsSource = sqlRepos.GetZak("IdZak", "asc");
+            LVZak2.ItemsSource = sqlRepos.GetZak("IdZak", "asc");
         }
         private void LoadData()
         {
@@ -87,7 +91,8 @@ namespace CejkaJ_OutdoorVybSklad
         {
             if (LVProd.SelectedItem != null)
             {                
-                List<Zbozi> listZbo = sqlRepos.GetZboZProd(LVProd.SelectedIndex+3);
+                Prodejka prodejka = (Prodejka)LVProd.SelectedItem;
+                List<Zbozi> listZbo = sqlRepos.GetZboZProd(prodejka.Id);
                 string text = "";
                 int pocet = 0;
                 foreach (Zbozi zbozi in listZbo)
@@ -100,7 +105,7 @@ namespace CejkaJ_OutdoorVybSklad
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             if(LVZak2.SelectedItem != null && LVZbo2.SelectedItem != null)
             {
@@ -115,6 +120,78 @@ namespace CejkaJ_OutdoorVybSklad
 
                 sqlRepos.addProd(selectedZak, selectedZbo, cena);
                 LVProd.ItemsSource = sqlRepos.GetProdejka("IdProd","ASC");
+            }
+        }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            if (LVProd.SelectedItem != null)
+            {
+                Prodejka prod = (Prodejka)LVProd.SelectedItem;
+                sqlRepos.RemoveProd(prod.Id);
+                LVProd.ItemsSource = sqlRepos.GetProdejka("IdProd", "ASC");
+            }
+        }
+
+        private void ADDZAK(object sender, RoutedEventArgs e)
+        {
+            if (JmenoTXT.Text !="" && PrijmeniTXT.Text != " " && AdresaTXT.Text != " ")
+            {
+                sqlRepos.AddZak(JmenoTXT.Text,PrijmeniTXT.Text,AdresaTXT.Text);
+                update();
+            }
+            
+        }
+
+        private void EDITZAK(object sender, RoutedEventArgs e)
+        {
+            if (LVZak.SelectedItem != null && JmenoTXTE.Text != "" && PrijmeniTXTE.Text != " " && AdresaTXTE.Text != " ")
+            {
+                Zakaznik zakaznik = (Zakaznik)LVZak.SelectedItem;
+                sqlRepos.EditZak(zakaznik.IdZak,JmenoTXTE.Text, PrijmeniTXTE.Text, AdresaTXTE.Text);
+                update();
+            }
+        }
+
+        private void LVZak_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(LVZak.SelectedItem != null)
+            {
+                Zakaznik zakaznik = (Zakaznik)LVZak.SelectedItem;
+                JmenoTXTE.Text = zakaznik.Jmeno;
+                PrijmeniTXTE.Text = zakaznik.Prijmeni;
+                AdresaTXTE.Text = zakaznik.Adresa;
+            }
+            
+        }
+        private void ADDZBO(object sender, RoutedEventArgs e)
+        {
+            if (NazevTXT.Text != "" && PopisTXT.Text != " " && PocetTXT.Text != " " && CenaTXT.Text != " ")
+            {
+                sqlRepos.AddZbo(NazevTXT.Text, PopisTXT.Text, int.Parse(PocetTXT.Text), int.Parse(CenaTXT.Text));
+                update();
+            }
+        }
+
+        private void EDITZBO(object sender, RoutedEventArgs e)
+        {
+            if (LVZbo.SelectedItem != null && NazevTXTE.Text != "" && PopisTXTE.Text != " " && PocetTXTE.Text != " " && CenaTXTE.Text != " ")
+            {
+                Zbozi zbo = (Zbozi)LVZbo.SelectedItem;
+                sqlRepos.EditZbo(zbo.IdZbo,NazevTXTE.Text, PopisTXTE.Text, int.Parse(PocetTXTE.Text), int.Parse(CenaTXTE.Text));
+                update();
+            }
+        }
+
+        private void LVZbo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LVZbo.SelectedItem != null)
+            {
+                Zbozi zbo = (Zbozi)LVZbo.SelectedItem;
+                NazevTXTE.Text = zbo.Nazev;
+                PopisTXTE.Text = zbo.Popis;
+                PocetTXTE.Text = zbo.PocetKsSklad.ToString();
+                CenaTXTE.Text = zbo.CenaKs.ToString();                
             }
         }
     }

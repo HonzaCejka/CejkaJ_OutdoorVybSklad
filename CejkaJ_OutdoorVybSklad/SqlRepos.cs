@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Azure.Core.HttpHeader;
+using System.Windows.Controls.Primitives;
 
 namespace CejkaJ_OutdoorVybSklad
 {
@@ -67,7 +69,7 @@ namespace CejkaJ_OutdoorVybSklad
                              (int)reader["IdZbo"],
                              (string)reader["Nazev"],
                              (string)reader["Popis"],
-                             (int)reader["PocetKsSKlad"],
+                             (int)reader["PocetKsSklad"],
                              (int)reader["CenaKs"]
                         );
 
@@ -148,12 +150,86 @@ namespace CejkaJ_OutdoorVybSklad
                 {                    
                     using (SqlCommand cmdInsert = conn.CreateCommand())
                     { 
-                        cmdInsert.CommandText = "INSERT INTO dbo.ZboNM (IdZbo,IdProd,pocet) Values (@IdZbo,@IdProd,1)";
+                        cmdInsert.CommandText = "INSERT INTO dbo.ZboNM (IdZbo,IdProd,pocet) Values (@IdZbo,@IdProd,1);";
                         cmdInsert.Parameters.AddWithValue("@IdZbo",id);
                         cmdInsert.Parameters.AddWithValue("@IdProd", insertedId);
                         cmdInsert.ExecuteNonQuery();
                     }
                 }
+                conn.Close();
+            }
+        }
+        public void RemoveProd(int id)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                conn.Open();
+                cmd.CommandText = $"DELETE FROM ZboNM WHERE IdProd = @IdProd;DELETE FROM Prodejka WHERE IdProd = @IdProd;";
+                cmd.Parameters.AddWithValue("@IdProd", id);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        public void AddZak(string jmeno, string prijmeni, string adresa)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                conn.Open();
+                cmd.CommandText = $"INSERT INTO dbo.Zak (Jmeno,Prijmeni,Adresa) Values (@Jmeno,@Prijmeni,@Adresa)";
+                cmd.Parameters.AddWithValue("@Jmeno", jmeno);
+                cmd.Parameters.AddWithValue("@Prijmeni", prijmeni);
+                cmd.Parameters.AddWithValue("@Adresa", adresa);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+        public void EditZak(int id,string jmeno, string prijmeni, string adresa)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                conn.Open();
+                cmd.CommandText = $"Update Zak set Jmeno = @Jmeno,Prijmeni = @Prijmeni,Adresa = @Adresa where IdZak = @Id";
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@Jmeno", jmeno);
+                cmd.Parameters.AddWithValue("@Prijmeni", prijmeni);
+                cmd.Parameters.AddWithValue("@Adresa", adresa);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        public void AddZbo(string nazev, string popis, int pocetSklad,int cena)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                conn.Open();
+                cmd.CommandText = $"INSERT INTO dbo.Zbozi (Nazev,Popis,PocetKsSklad,CenaKs) Values (@Nazev,@Popis,@PocetKsSklad,@Cena)";
+                cmd.Parameters.AddWithValue("@Nazev", nazev);
+                cmd.Parameters.AddWithValue("@Popis", popis);
+                cmd.Parameters.AddWithValue("@PocetKsSklad", pocetSklad);
+                cmd.Parameters.AddWithValue("@Cena", cena);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+        public void EditZbo(int id, string nazev, string popis, int pocetSklad, int cena)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                conn.Open();                
+                cmd.CommandText = $"Update Zbozi set Nazev = @Nazev,Popis = @Popis,PocetKsSklad = @PocetKsSklad,CenaKs = @Cena where IdZbo = @Id";
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@Nazev", nazev);
+                cmd.Parameters.AddWithValue("@Popis", popis);
+                cmd.Parameters.AddWithValue("@PocetKsSklad", pocetSklad);
+                cmd.Parameters.AddWithValue("@Cena", cena);
+                cmd.ExecuteNonQuery();
                 conn.Close();
             }
         }
