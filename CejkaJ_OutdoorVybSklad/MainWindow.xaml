@@ -145,6 +145,7 @@
                                         <RowDefinition Height="1*"/>
                                         <RowDefinition Height="2*"/>
                                         <RowDefinition Height="1*"/>
+                                        <RowDefinition Height="1*"/>
                                     </Grid.RowDefinitions>
                                     <Label Content="EDIT" HorizontalAlignment="Center" Grid.Row="0"/>
                                     <Label Content="Jmeno" HorizontalAlignment="Center" Grid.Row="1"/>
@@ -154,6 +155,7 @@
                                     <Label Content="Adresa" HorizontalAlignment="Center" Grid.Row="5"/>
                                     <TextBox x:Name="AdresaTXTE" Grid.Row="6"/>
                                     <Button Content="Edit" Grid.Row="7" Click="EDITZAK" />
+                                    <Button Content="Delete" Grid.Row="8" Click="RemoveZAK" />
                                 </Grid>
                             </TabItem>
                         </TabControl>

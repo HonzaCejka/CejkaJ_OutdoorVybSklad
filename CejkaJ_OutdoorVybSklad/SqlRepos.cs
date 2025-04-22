@@ -201,6 +201,18 @@ namespace CejkaJ_OutdoorVybSklad
                 conn.Close();
             }
         }
+        public void RemoveZak(int id)
+        {
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            using(SqlCommand cmd = conn.CreateCommand())
+            {
+                conn.Open();
+                cmd.CommandText = "Delete from Zak where IdZak = @Id";
+                cmd.Parameters.AddWithValue ("@Id", id);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
 
         public void AddZbo(string nazev, string popis, int pocetSklad,int cena)
         {

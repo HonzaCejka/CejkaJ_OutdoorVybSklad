@@ -194,5 +194,22 @@ namespace CejkaJ_OutdoorVybSklad
                 CenaTXTE.Text = zbo.CenaKs.ToString();                
             }
         }
+
+        private void RemoveZAK(object sender, RoutedEventArgs e)
+        {
+            if(LVZak.SelectedItem != null)
+            {
+                Zakaznik zak = (Zakaznik)LVZak.SelectedItem;
+                try
+                {
+                    sqlRepos.RemoveZak(zak.IdZak);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
     }
 }
